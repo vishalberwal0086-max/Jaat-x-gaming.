@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAAT X GAMING</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #080808;
+      color: white;
+    }
+
+    header {
+      background: #111;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #00ff88;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #00ff88;
+    }
+
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at center, #123b2a 0%, #080808 55%);
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 9vw, 90px);
+      margin-bottom: 15px;
+      color: #00ff88;
+      text-shadow: 0 0 25px #00ff88;
+    }
+
+    .hero p {
+      color: #ccc;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      background: #00ff88;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 7px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ff88;
+    }
+
+    section {
+      padding: 70px 8%;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 35px;
+      margin-bottom: 40px;
+      color: #00ff88;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .game-card {
+      background: #121212;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+      border-color: #00ff88;
+      box-shadow: 0 0 20px rgba(0,255,136,0.2);
+    }
+
+    .game-icon {
+      font-size: 55px;
+      margin-bottom: 15px;
+    }
+
+    .game-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .game-card p {
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    .leaderboard {
+      max-width: 800px;
+      margin: auto;
+      background: #121212;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #222;
+    }
+
+    .player {
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 25px;
+      border-bottom: 1px solid #222;
+    }
+
+    .player:last-child {
+      border-bottom: none;
+    }
+
+    .rank {
+      color: #00ff88;
+      font-weight: bold;
+    }
+
+    .score {
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    .about {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      color: #bbb;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #111;
+      color: #888;
+      border-top: 1px solid #222;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      nav a {
+        margin-left: 8px;
+        font-size: 13px;
+      }
+
+      section {
+        padding: 55px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">JAAT X GAMING</div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#games">Games</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div>
+        <h1>JAAT X GAMING</h1>
+        <p>Enter the game. Build your legacy. 🔥</p>
+        <a href="#games" class="btn">EXPLORE GAMES</a>
+      </div>
+    </section>
+
+    <section id="games">
+      <h2 class="title">🎮 POPULAR GAMES</h2>
+
+      <div class="games">
+
+        <div class="game-card">
+          <div class="game-icon">🔫</div>
+          <h3>Free Fire</h3>
+          <p>Battle Royale gaming zone.</p>
+          <a href="#" class="btn">PLAY</a>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">⛏️</div>
+          <h3>Minecraft</h3>
+          <p>Build your own gaming world.</p>
+          <a href="#" class="btn">PLAY</a>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">⚔️</div>
+          <h3>BGMI</h3>
+          <p>Battle it out and survive.</p>
+          <a href="#" class="btn">PLAY</a>
+        </div>
+
+        <div class="game-card">
+          <div class="game-icon">🏎️</div>
+          <h3>Racing</h3>
+          <p>Speed, cars and competition.</p>
+          <a href="#" class="btn">PLAY</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="leaderboard">
+      <h2 class="title">🏆 LEADERBOARD</h2>
+
+      <div class="leaderboard">
+
+        <div class="player">
+          <span><span class="rank">#1</span>  JaatKing</span>
+          <span class="score">9850</span>
+        </div>
+
+        <div class="player">
+          <span><span class="rank">#2</span>  XShadow</span>
+          <span class="score">8720</span>
+        </div>
+
+        <div class="player">
+          <span><span class="rank">#3</span>  ProGamer</span>
+          <span class="score">7940</span>
+        </div>
+
+        <div class="player">
+          <span><span class="rank">#4</span>  DarkX</span>
+          <span class="score">7210</span>
+        </div>
+
+        <div class="player">
+          <span><span class="rank">#5</span>  GamerBoy</span>
+          <span class="score">6890</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="title">🔥 ABOUT JAAT X GAMING</h2>
+
+      <div class="about">
+        <p>
+          Welcome to JAAT X GAMING — a gaming community built for gamers.
+          Discover games, compete with other players and enjoy the gaming world.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 JAAT X GAMING | All Rights Reserved
+  </footer>
+
+</body>
+  </html>
