@@ -6,377 +6,156 @@
 <title>JAAT X GAMING</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box}
 body{
-  background:#070707;color:#fff;font-family:Arial,sans-serif;
+  margin:0;
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
 }
 header{
-  padding:18px 6%;background:#101010;border-bottom:1px solid #292929;
-  display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5
+  padding:20px;
+  text-align:center;
+  border-bottom:1px solid #222;
 }
-.logo{font-size:24px;font-weight:900;color:#00ff88}
-nav a{color:#fff;text-decoration:none;margin-left:18px;font-size:14px}
-nav a:hover{color:#00ff88}
-
-.hero{
-  text-align:center;padding:80px 20px;
-  background:radial-gradient(circle,#123d2b,#070707 65%);
+header h1{margin:0;color:#00ff66}
+.chat{
+  max-width:700px;
+  margin:20px auto;
+  padding:15px;
 }
-.hero h1{font-size:clamp(42px,10vw,85px);color:#00ff88;text-shadow:0 0 25px #00ff88}
-.hero p{color:#bbb;margin:15px 0 30px;font-size:18px}
-.btn{
-  display:inline-block;background:#00ff88;color:#000;padding:13px 22px;
-  border:0;border-radius:7px;font-weight:bold;cursor:pointer;text-decoration:none
+input,button{
+  padding:13px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#151515;
+  color:white;
 }
-
-section{padding:60px 6%}
-.title{text-align:center;color:#00ff88;font-size:34px;margin-bottom:35px}
-
-.games{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px
+input{width:100%;margin-bottom:10px}
+button{
+  background:#00c853;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
 }
-.card{
-  background:#121212;border:1px solid #292929;border-radius:14px;padding:28px;
-  text-align:center
+#messages{
+  height:400px;
+  overflow-y:auto;
+  border:1px solid #222;
+  border-radius:10px;
+  padding:12px;
+  margin:15px 0;
+  background:#0d0d0d;
 }
-.card:hover{border-color:#00ff88}
-.icon{font-size:55px;margin-bottom:15px}
-.card p{color:#aaa;margin:10px 0 20px;line-height:1.5}
-
-.game-area{
-  max-width:700px;margin:auto;background:#101010;border:1px solid #292929;
-  border-radius:14px;padding:20px;text-align:center
+.msg{
+  background:#171717;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
 }
-#gameCanvas{
-  width:100%;max-width:600px;background:#162016;border:2px solid #00ff88;
-  border-radius:10px;display:block;margin:15px auto
+.name{
+  color:#00ff66;
+  font-weight:bold;
 }
-.info{color:#aaa;margin:10px}
-.score{color:#00ff88;font-weight:bold}
-
-.about{
-  max-width:750px;margin:auto;text-align:center;color:#aaa;line-height:1.8
+.time{
+  color:#777;
+  font-size:11px;
 }
-footer{text-align:center;padding:30px;background:#101010;color:#777}
-
-.hidden{display:none}
-
-@media(max-width:600px){
- header{padding:15px 4%}
- nav a{margin-left:7px;font-size:12px}
- section{padding:45px 4%}
+.row{
+  display:flex;
+  gap:8px;
 }
+.row input{margin:0}
+.row button{width:100px}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">JAAT X GAMING</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#games">Games</a>
-    <a href="#about">About</a>
-  </nav>
+  <h1>🎮 JAAT X GAMING</h1>
+  <p>💬 Live Gaming Chat</p>
 </header>
 
-<section class="hero" id="home">
-  <h1>JAAT X GAMING</h1>
-  <p>Enter the game. Build your legacy. 🔥</p>
-  <a class="btn" href="#games">PLAY NOW</a>
-</section>
+<div class="chat">
 
-<section id="games">
-<h2 class="title">🎮 GAMES</h2>
+  <input id="username" placeholder="Apna naam likho">
 
-<div class="games">
-
-  <div class="card">
-    <div class="icon">🔫</div>
-    <h2>Battle Shooter</h2>
-    <p>Move your player and shoot the enemies.</p>
-    <button class="btn" onclick="startShooter()">PLAY GAME</button>
+  <div id="messages">
+    Loading chat...
   </div>
 
-  <div class="card">
-    <div class="icon">🏆</div>
-    <h2>Battle Royale</h2>
-    <p>Survive inside the shrinking battle zone.</p>
-    <button class="btn" onclick="startRoyale()">PLAY GAME</button>
+  <div class="row">
+    <input id="message" placeholder="Message likho...">
+    <button onclick="sendMessage()">SEND</button>
   </div>
 
 </div>
-</section>
 
-<section id="gameSection" class="hidden">
-
-<h2 class="title" id="gameTitle">🎮 GAME</h2>
-
-<div class="game-area">
-
-<p class="info">
-Score: <span id="score" class="score">0</span>
-&nbsp;&nbsp; ❤️ Health: <span id="health" class="score">100</span>
-</p>
-
-<canvas id="gameCanvas" width="600" height="400"></canvas>
-
-<p class="info">
-PC: Arrow keys / WASD + Space &nbsp; | &nbsp;
-Mobile: touch the game area
-</p>
-
-<button class="btn" onclick="stopGame()">EXIT GAME</button>
-
-</div>
-</section>
-
-<section id="about">
-<h2 class="title">🔥 ABOUT</h2>
-<div class="about">
-JAAT X GAMING is a gaming website with original browser mini-games.
-Play, improve your score and challenge yourself. 🎮🔥
-</div>
-</section>
-
-<footer>
-© 2026 JAAT X GAMING
-</footer>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
-const canvas=document.getElementById("gameCanvas");
-const ctx=canvas.getContext("2d");
+const firebaseConfig = {
+  apiKey: "AIzaSyB2F5Ubqz9zr40U0YwNtFSvZaPylm9lhoQ",
+  authDomain: "jaat-x-gaming.firebaseapp.com",
+  databaseURL: "https://jaat-x-gaming-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "jaat-x-gaming",
+  storageBucket: "jaat-x-gaming.firebasestorage.app",
+  messagingSenderId: "479992655799",
+  appId: "1:479992655799:web:89c76ebb0d389521e84232",
+  measurementId: "G-8QL4YV988R"
+};
 
-let player, enemies, bullets, score, health;
-let keys={};
-let gameRunning=false;
-let gameType="shooter";
-let animation;
+firebase.initializeApp(firebaseConfig);
 
-document.addEventListener("keydown",e=>{
-  keys[e.key.toLowerCase()]=true;
+const db = firebase.database();
 
-  if(e.code==="Space"){
-    e.preventDefault();
-    shoot();
+function sendMessage(){
+  const name = document.getElementById("username").value.trim();
+  const text = document.getElementById("message").value.trim();
+
+  if(!name || !text){
+    alert("Naam aur message dono likho!");
+    return;
   }
+
+  db.ref("messages").push({
+    name:name,
+    text:text,
+    time:Date.now()
+  });
+
+  document.getElementById("message").value="";
+}
+
+db.ref("messages").limitToLast(100).on("value", snapshot => {
+  const box=document.getElementById("messages");
+  box.innerHTML="";
+
+  snapshot.forEach(child => {
+    const data=child.val();
+
+    const div=document.createElement("div");
+    div.className="msg";
+
+    div.innerHTML =
+      '<div class="name"></div>' +
+      '<div class="text"></div>' +
+      '<div class="time"></div>';
+
+    div.querySelector(".name").textContent=data.name;
+    div.querySelector(".text").textContent=data.text;
+    div.querySelector(".time").textContent=
+      new Date(data.time).toLocaleString();
+
+    box.appendChild(div);
+  });
+
+  box.scrollTop=box.scrollHeight;
 });
-
-document.addEventListener("keyup",e=>{
-  keys[e.key.toLowerCase()]=false;
-});
-
-canvas.addEventListener("touchstart",e=>{
-  e.preventDefault();
-  shoot();
-},{passive:false});
-
-canvas.addEventListener("click",shoot);
-
-function resetGame(){
-  player={
-    x:canvas.width/2-15,
-    y:canvas.height-60,
-    size:30,
-    speed:5
-  };
-
-  enemies=[];
-  bullets=[];
-  score=0;
-  health=100;
-}
-
-function startShooter(){
-  gameType="shooter";
-  document.getElementById("gameTitle").textContent="🔫 BATTLE SHOOTER";
-  document.getElementById("gameSection").classList.remove("hidden");
-  resetGame();
-  gameRunning=true;
-  gameLoop();
-  document.getElementById("gameSection").scrollIntoView({behavior:"smooth"});
-}
-
-function startRoyale(){
-  gameType="royale";
-  document.getElementById("gameTitle").textContent="🏆 BATTLE ROYALE";
-  document.getElementById("gameSection").classList.remove("hidden");
-  resetGame();
-  gameRunning=true;
-  gameLoop();
-  document.getElementById("gameSection").scrollIntoView({behavior:"smooth"});
-}
-
-function stopGame(){
-  gameRunning=false;
-  cancelAnimationFrame(animation);
-  document.getElementById("gameSection").classList.add("hidden");
-}
-
-function shoot(){
-  if(!gameRunning)return;
-
-  bullets.push({
-    x:player.x+player.size/2-3,
-    y:player.y,
-    w:6,
-    h:12,
-    speed:8
-  });
-}
-
-function spawnEnemy(){
-  enemies.push({
-    x:Math.random()*(canvas.width-30),
-    y:-30,
-    size:30,
-    speed:1.5+Math.random()*2
-  });
-}
-
-function update(){
-
-  if(keys["arrowleft"]||keys["a"])
-    player.x-=player.speed;
-
-  if(keys["arrowright"]||keys["d"])
-    player.x+=player.speed;
-
-  if(keys["arrowup"]||keys["w"])
-    player.y-=player.speed;
-
-  if(keys["arrowdown"]||keys["s"])
-    player.y+=player.speed;
-
-  player.x=Math.max(0,Math.min(canvas.width-player.size,player.x));
-  player.y=Math.max(0,Math.min(canvas.height-player.size,player.y));
-
-  bullets.forEach(b=>b.y-=b.speed);
-  bullets=bullets.filter(b=>b.y>-20);
-
-  if(Math.random()<0.025)
-    spawnEnemy();
-
-  enemies.forEach(e=>{
-    if(gameType==="royale"){
-      e.speed+=0.002;
-    }
-    e.y+=e.speed;
-  });
-
-  enemies.forEach((e,ei)=>{
-
-    if(
-      player.x<e.x+e.size &&
-      player.x+player.size>e.x &&
-      player.y<e.y+e.size &&
-      player.y+player.size>e.y
-    ){
-      health-=10;
-      enemies.splice(ei,1);
-    }
-
-    bullets.forEach((b,bi)=>{
-      if(
-        b.x<e.x+e.size &&
-        b.x+b.w>e.x &&
-        b.y<e.y+e.size &&
-        b.y+b.h>e.y
-      ){
-        enemies.splice(ei,1);
-        bullets.splice(bi,1);
-        score+=10;
-      }
-    });
-  });
-
-  enemies=enemies.filter(e=>e.y<canvas.height+40);
-
-  if(gameType==="royale" && score>=100){
-    health=Math.min(100,health+5);
-  }
-
-  if(health<=0){
-    gameOver();
-  }
-
-  document.getElementById("score").textContent=score;
-  document.getElementById("health").textContent=health;
-}
-
-function draw(){
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  // background grid
-  ctx.strokeStyle="#203020";
-  ctx.lineWidth=1;
-
-  for(let x=0;x<canvas.width;x+=40){
-    ctx.beginPath();
-    ctx.moveTo(x,0);
-    ctx.lineTo(x,canvas.height);
-    ctx.stroke();
-  }
-
-  for(let y=0;y<canvas.height;y+=40){
-    ctx.beginPath();
-    ctx.moveTo(0,y);
-    ctx.lineTo(canvas.width,y);
-    ctx.stroke();
-  }
-
-  // player
-  ctx.fillStyle="#00ff88";
-  ctx.fillRect(player.x,player.y,player.size,player.size);
-
-  // bullets
-  ctx.fillStyle="#fff";
-  bullets.forEach(b=>{
-    ctx.fillRect(b.x,b.y,b.w,b.h);
-  });
-
-  // enemies
-  ctx.fillStyle="#ff4444";
-  enemies.forEach(e=>{
-    ctx.fillRect(e.x,e.y,e.size,e.size);
-  });
-
-  // royale zone
-  if(gameType==="royale"){
-    ctx.strokeStyle="#00ff88";
-    ctx.lineWidth=4;
-    ctx.beginPath();
-    ctx.arc(
-      canvas.width/2,
-      canvas.height/2,
-      150,
-      0,
-      Math.PI*2
-    );
-    ctx.stroke();
-  }
-}
-
-function gameLoop(){
-
-  if(!gameRunning)return;
-
-  update();
-  draw();
-
-  animation=requestAnimationFrame(gameLoop);
-}
-
-function gameOver(){
-
-  gameRunning=false;
-  cancelAnimationFrame(animation);
-
-  setTimeout(()=>{
-    alert("GAME OVER! Your score: "+score);
-  },100);
-}
 </script>
 
 </body>
