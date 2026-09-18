@@ -1,4 +1,5 @@
-html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,97 +9,190 @@ html lang="en">
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:#080808;
-  color:white;
   font-family:Arial,sans-serif;
+  background:#070707;
+  color:white;
 }
 header{
+  background:#111;
   padding:20px;
   text-align:center;
-  border-bottom:1px solid #222;
+  border-bottom:2px solid #00ff66;
 }
-header h1{margin:0;color:#00ff66}
-.chat{
-  max-width:700px;
-  margin:20px auto;
-  padding:15px;
-}
-input,button{
-  padding:13px;
-  border-radius:8px;
-  border:1px solid #333;
-  background:#151515;
-  color:white;
-}
-input{width:100%;margin-bottom:10px}
-button{
-  background:#00c853;
-  color:#000;
+.logo{
+  font-size:28px;
   font-weight:bold;
+  color:#00ff66;
+}
+nav{
+  margin-top:15px;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  margin:0 8px;
+}
+section{
+  padding:25px 15px;
+  max-width:900px;
+  margin:auto;
+}
+.card{
+  background:#151515;
+  border:1px solid #333;
+  border-radius:15px;
+  padding:20px;
+  margin:15px 0;
+}
+h2{color:#00ff66}
+button{
+  background:#00ff66;
+  color:#000;
+  border:0;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  margin:5px;
   cursor:pointer;
 }
+input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border-radius:8px;
+  border:1px solid #444;
+  background:#222;
+  color:white;
+}
 #messages{
-  height:400px;
+  height:220px;
   overflow-y:auto;
-  border:1px solid #222;
+  background:#080808;
+  padding:10px;
   border-radius:10px;
-  padding:12px;
-  margin:15px 0;
-  background:#0d0d0d;
+  margin-bottom:10px;
 }
 .msg{
-  background:#171717;
-  padding:10px;
-  margin:8px 0;
-  border-radius:8px;
+  background:#222;
+  padding:8px;
+  margin:5px 0;
+  border-radius:7px;
 }
-.name{
+#gameArea{
+  display:none;
+  text-align:center;
+}
+canvas{
+  max-width:100%;
+  background:#050505;
+  border:2px solid #00ff66;
+  border-radius:10px;
+}
+.status{
+  margin:10px 0;
   color:#00ff66;
-  font-weight:bold;
 }
-.time{
+footer{
+  text-align:center;
+  padding:30px;
   color:#777;
-  font-size:11px;
 }
-.row{
-  display:flex;
-  gap:8px;
-}
-.row input{margin:0}
-.row button{width:100px}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>🎮 JAAT X GAMING</h1>
-  <p>💬 Live Gaming Chat</p>
+  <div class="logo">🔥 JAAT X GAMING 🔥</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#games">Games</a>
+    <a href="#chat">Chat</a>
+    <a href="#call">Voice Call</a>
+  </nav>
 </header>
 
-<div class="chat">
+<section id="home">
+  <h1>Welcome to JAAT X GAMING</h1>
+  <p>Gaming • Chat • Voice Call</p>
+</section>
 
-  <input id="username" placeholder="Apna naam likho">
+<section id="games">
+<h2>🎮 Games</h2>
 
-  <div id="messages">
-    Loading chat...
-  </div>
+<div class="card">
+  <h3>🔫 Battle Shooter</h3>
+  <p>Move and shoot enemies.</p>
+  <button onclick="startShooter()">PLAY GAME</button>
+</div>
 
-  <div class="row">
-    <input id="message" placeholder="Message likho...">
-    <button onclick="sendMessage()">SEND</button>
-  </div>
+<div class="card">
+  <h3>🪖 Battle Royale</h3>
+  <p>Survive inside the zone.</p>
+  <button onclick="startRoyale()">PLAY GAME</button>
+</div>
+
+<div id="gameArea">
+  <p id="gameInfo">Score: 0 | Health: 100</p>
+  <canvas id="game" width="600" height="400"></canvas>
+  <br>
+  <button onclick="stopGame()">STOP GAME</button>
+</div>
+</section>
+
+
+<section id="chat">
+<h2>💬 Live Chat</h2>
+
+<div class="card">
+  <input id="name" placeholder="Your name">
+  <div id="messages"></div>
+
+  <input id="message" placeholder="Type message...">
+  <button onclick="sendMessage()">SEND</button>
+</div>
+</section>
+
+
+<section id="call">
+<h2>📞 Voice Call</h2>
+
+<div class="card">
+
+<p>
+First person: <b>Create Call</b><br>
+Second person: enter the same Room ID and press <b>Join Call</b>.
+</p>
+
+<input id="roomId" placeholder="Room ID">
+
+<button onclick="createCall()">📞 CREATE CALL</button>
+<button onclick="joinCall()">📲 JOIN CALL</button>
+<button onclick="endCall()">❌ END CALL</button>
+
+<div class="status" id="callStatus">
+Not connected
+</div>
+
+<audio id="remoteAudio" autoplay></audio>
 
 </div>
+</section>
+
+
+<footer>
+JAAT X GAMING © 2026
+</footer>
+
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
+
 const firebaseConfig = {
-  apiKey: "AIzaSyB2F5Ubqz9zr40U0YwNtFSvZaPylm9lhoQ",
+  apiKey: "AIzaSyB2F5Ubq9zr40U0YwNtFSvZaPylm9lhoQ",
   authDomain: "jaat-x-gaming.firebaseapp.com",
   databaseURL: "https://jaat-x-gaming-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "jaat-x-gaming",
@@ -109,53 +203,537 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.database();
 
-function sendMessage(){
-  const name = document.getElementById("username").value.trim();
-  const text = document.getElementById("message").value.trim();
 
-  if(!name || !text){
-    alert("Naam aur message dono likho!");
+/* ================= CHAT ================= */
+
+const messagesBox = document.getElementById("messages");
+
+db.ref("chat").limitToLast(50).on("child_added", snap => {
+
+  const data = snap.val();
+
+  const div = document.createElement("div");
+  div.className = "msg";
+
+  div.textContent = data.name + ": " + data.message;
+
+  messagesBox.appendChild(div);
+
+  messagesBox.scrollTop = messagesBox.scrollHeight;
+});
+
+
+function sendMessage(){
+
+  const name = document.getElementById("name").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  if(!name || !message){
+    alert("Name aur message dono likho");
     return;
   }
 
-  db.ref("messages").push({
+  db.ref("chat").push({
     name:name,
-    text:text,
+    message:message,
     time:Date.now()
   });
 
   document.getElementById("message").value="";
 }
 
-db.ref("messages").limitToLast(100).on("value", snapshot => {
-  const box=document.getElementById("messages");
-  box.innerHTML="";
 
-  snapshot.forEach(child => {
-    const data=child.val();
+/* ================= VOICE CALL ================= */
 
-    const div=document.createElement("div");
-    div.className="msg";
+let peerConnection = null;
+let localStream = null;
+let currentRoom = null;
 
-    div.innerHTML =
-      '<div class="name"></div>' +
-      '<div class="text"></div>' +
-      '<div class="time"></div>';
+const servers = {
+  iceServers:[
+    {urls:"stun:stun.l.google.com:19302"}
+  ]
+};
 
-    div.querySelector(".name").textContent=data.name;
-    div.querySelector(".text").textContent=data.text;
-    div.querySelector(".time").textContent=
-      new Date(data.time).toLocaleString();
 
-    box.appendChild(div);
+function createPeer(){
+
+  peerConnection = new RTCPeerConnection(servers);
+
+  peerConnection.onicecandidate = event => {
+
+    if(event.candidate && currentRoom){
+
+      const role = peerConnection.callRole;
+
+      db.ref("calls/"+currentRoom+"/"+role+"Candidates")
+        .push(event.candidate.toJSON());
+    }
+  };
+
+  peerConnection.ontrack = event => {
+
+    document.getElementById("remoteAudio").srcObject =
+      event.streams[0];
+  };
+
+  return peerConnection;
+}
+
+
+async function getMicrophone(){
+
+  try{
+
+    localStream =
+      await navigator.mediaDevices.getUserMedia({
+        audio:true
+      });
+
+    localStream.getTracks().forEach(track => {
+
+      peerConnection.addTrack(
+        track,
+        localStream
+      );
+
+    });
+
+  }catch(error){
+
+    alert("Microphone permission allow karo.");
+
+    throw error;
+  }
+}
+
+
+/* CREATE CALL */
+
+async function createCall(){
+
+  try{
+
+    let room =
+      document.getElementById("roomId").value.trim();
+
+    if(!room){
+
+      room =
+        Math.random().toString(36).substring(2,8);
+
+      document.getElementById("roomId").value=room;
+
+      alert(
+        "Room ID: "+room+
+        "\nIs Room ID ko dusre person ko bhejo."
+      );
+    }
+
+    currentRoom=room;
+
+    const roomRef=db.ref("calls/"+room);
+
+    const snapshot=await roomRef.get();
+
+    if(snapshot.exists()){
+
+      alert("Ye Room ID already use ho rahi hai. Nayi Room ID banao.");
+      return;
+    }
+
+    createPeer();
+
+    peerConnection.callRole="caller";
+
+    await getMicrophone();
+
+    const offer =
+      await peerConnection.createOffer();
+
+    await peerConnection.setLocalDescription(offer);
+
+    await roomRef.set({
+      offer:{
+        type:offer.type,
+        sdp:offer.sdp
+      }
+    });
+
+    roomRef.child("answer").on("value", async snap=>{
+
+      const answer=snap.val();
+
+      if(
+        answer &&
+        !peerConnection.currentRemoteDescription
+      ){
+
+        await peerConnection.setRemoteDescription(
+          new RTCSessionDescription(answer)
+        );
+
+        document.getElementById("callStatus").textContent=
+          "🟢 Connected";
+      }
+
+    });
+
+
+    roomRef.child("calleeCandidates").on(
+      "child_added",
+      snap=>{
+
+        const candidate=snap.val();
+
+        peerConnection.addIceCandidate(
+          new RTCIceCandidate(candidate)
+        );
+
+      }
+    );
+
+    document.getElementById("callStatus").textContent=
+      "📞 Waiting for other person...";
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Call create nahi ho payi.");
+  }
+}
+
+
+/* JOIN CALL */
+
+async function joinCall(){
+
+  try{
+
+    const room =
+      document.getElementById("roomId").value.trim();
+
+    if(!room){
+
+      alert("Room ID enter karo.");
+      return;
+    }
+
+    currentRoom=room;
+
+    const roomRef=db.ref("calls/"+room);
+
+    const snapshot=await roomRef.get();
+
+    if(!snapshot.exists()){
+
+      alert("Room nahi mili.");
+      return;
+    }
+
+    const data=snapshot.val();
+
+    if(!data.offer){
+
+      alert("Call offer nahi mila.");
+      return;
+    }
+
+    createPeer();
+
+    peerConnection.callRole="callee";
+
+    await getMicrophone();
+
+    await peerConnection.setRemoteDescription(
+      new RTCSessionDescription(data.offer)
+    );
+
+    const answer =
+      await peerConnection.createAnswer();
+
+    await peerConnection.setLocalDescription(answer);
+
+    await roomRef.child("answer").set({
+      type:answer.type,
+      sdp:answer.sdp
+    });
+
+
+    roomRef.child("callerCandidates").on(
+      "child_added",
+      snap=>{
+
+        const candidate=snap.val();
+
+        peerConnection.addIceCandidate(
+          new RTCIceCandidate(candidate)
+        );
+
+      }
+    );
+
+    document.getElementById("callStatus").textContent=
+      "🟢 Connected";
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Call join nahi ho payi.");
+  }
+}
+
+
+/* END CALL */
+
+async function endCall(){
+
+  if(localStream){
+
+    localStream.getTracks().forEach(
+      track=>track.stop()
+    );
+
+    localStream=null;
+  }
+
+  if(peerConnection){
+
+    peerConnection.close();
+    peerConnection=null;
+  }
+
+  document.getElementById("remoteAudio").srcObject=null;
+
+  document.getElementById("callStatus").textContent=
+    "Call ended";
+
+  currentRoom=null;
+}
+
+
+/* ================= GAME ================= */
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+let keys={};
+let bullets=[];
+let enemies=[];
+let player;
+let score=0;
+let health=100;
+let gameRunning=false;
+let royale=false;
+let gameLoopId;
+
+
+document.addEventListener("keydown",e=>{
+  keys[e.key.toLowerCase()]=true;
+
+  if(e.code==="Space"){
+    shoot();
+  }
+});
+
+
+document.addEventListener("keyup",e=>{
+  keys[e.key.toLowerCase()]=false;
+});
+
+
+canvas.addEventListener("click",shoot);
+
+
+function startShooter(){
+
+  royale=false;
+  startGame();
+}
+
+
+function startRoyale(){
+
+  royale=true;
+  startGame();
+}
+
+
+function startGame(){
+
+  document.getElementById("gameArea").style.display="block";
+
+  player={
+    x:300,
+    y:330,
+    size:20,
+    speed:5
+  };
+
+  bullets=[];
+  enemies=[];
+  score=0;
+  health=100;
+  gameRunning=true;
+
+  gameLoop();
+}
+
+
+function shoot(){
+
+  if(!gameRunning)return;
+
+  bullets.push({
+    x:player.x,
+    y:player.y,
+    speed:8
+  });
+}
+
+
+function spawnEnemy(){
+
+  enemies.push({
+    x:Math.random()*560+20,
+    y:20,
+    size:20,
+    speed:royale ?
+      1.5+Math.random()*2 :
+      1+Math.random()*1.5
+  });
+}
+
+
+function update(){
+
+  if(keys["arrowleft"] || keys["a"])
+    player.x-=player.speed;
+
+  if(keys["arrowright"] || keys["d"])
+    player.x+=player.speed;
+
+  if(keys["arrowup"] || keys["w"])
+    player.y-=player.speed;
+
+  if(keys["arrowdown"] || keys["s"])
+    player.y+=player.speed;
+
+  player.x=Math.max(10,Math.min(590,player.x));
+  player.y=Math.max(10,Math.min(390,player.y));
+
+
+  bullets.forEach(b=>{
+    b.y-=b.speed;
   });
 
-  box.scrollTop=box.scrollHeight;
-});
-</script>
+  bullets=bullets.filter(b=>b.y>0);
 
-</body>
-</html>
+
+  enemies.forEach(e=>{
+    e.y+=e.speed;
+  });
+
+
+  for(let i=enemies.length-1;i>=0;i--){
+
+    const e=enemies[i];
+
+    if(e.y>400){
+
+      enemies.splice(i,1);
+
+      health-=10;
+
+      continue;
+    }
+
+
+    for(let j=bullets.length-1;j>=0;j--){
+
+      const b=bullets[j];
+
+      if(
+        Math.abs(b.x-e.x)<20 &&
+        Math.abs(b.y-e.y)<20
+      ){
+
+        enemies.splice(i,1);
+        bullets.splice(j,1);
+
+        score+=10;
+
+        break;
+      }
+    }
+  }
+
+
+  if(health<=0){
+
+    gameRunning=false;
+
+    alert("Game Over! Score: "+score);
+  }
+
+
+  if(Math.random()<0.03){
+
+    spawnEnemy();
+  }
+}
+
+
+function draw(){
+
+  ctx.clearRect(0,0,600,400);
+
+  /* player */
+
+  ctx.fillStyle="#00ff66";
+
+  ctx.fillRect(
+    player.x-10,
+    player.y-10,
+    20,
+    20
+  );
+
+
+  /* bullets */
+
+  ctx.fillStyle="white";
+
+  bullets.forEach(b=>{
+
+    ctx.fillRect(
+      b.x-2,
+      b.y-6,
+      4,
+      10
+    );
+
+  });
+
+
+  /* enemies */
+
+  ctx.fillStyle="red";
+
+  enemies.forEach(e=>{
+
+    ctx.fillRect(
+      e.x-10,
+      e.y-10,
+      20,
+      20
+    );
+
+  });
+
+
+  /* royale
